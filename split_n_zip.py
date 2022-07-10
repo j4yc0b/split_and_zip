@@ -16,6 +16,9 @@ def _get_size_MB(file_path):
 class Splitter:
     """ Class for handling the zipping and splitting of the file
     Takes in the max_size argument from the command line
+    :param file_name: The file path of the csv-file.
+    :param max_file_size: The maximum size of the desired output file(s).
+    :param csv_delimiter: Delimiter of the csv file.
     """
 
     def __init__(self, file_name, max_file_size, csv_delimiter):
@@ -94,21 +97,15 @@ class Splitter:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("file", help="Provide the filename.")
-    parser.add_argument("max_size", type=float,
-                        help="Provide the maximum filesize in MB, after which you want the program to do the split.")
+    parser.add_argument("file_name", help="Provide the filename.")
+    parser.add_argument("max_file_size", type=float,
+                        help="Provide the maximum filesize in MB. Files larger than this will be splitted into multiple parts.")
 
     parser.add_argument("--csv_delimiter", help="Provide the delimiter of the csv file (defaults to ';').",
                         type=str, default=";")
     args = parser.parse_args()
 
-    if len(sys.argv) < 3:
-        print("Usage: python split.py [filename] [max size of the file]")
-    else:
-        print(f"\nFile used is {args.file}.\n"
-              f"Splitting if file is bigger than {args.max_size}MB.\n")
-
-    fw = Splitter(args.file, args.max_size, args.csv_delimiter)
+    fw = Splitter(args.file_name, args.max_file_size, args.csv_delimiter)
     fw.main()
 
 
