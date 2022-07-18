@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import argparse
-import sys
 from pandas.errors import ParserError
 
 
